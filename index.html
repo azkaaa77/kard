@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KARD.ID - Digital Ecosystem</title>
+<!-- React & Babel -->
+<script crossorigin="" src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin="" src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#ddc1b1",
+                    "surface-container-lowest": "#0e0e0f",
+                    "inverse-primary": "#5a5e6b",
+                    "outline-variant": "#45464c",
+                    "on-tertiary-container": "#897264",
+                    "inverse-on-surface": "#313031",
+                    "surface-container-highest": "#353435",
+                    "on-primary": "#2c303c",
+                    "on-secondary-fixed-variant": "#39485a",
+                    "secondary": "#b9c8de",
+                    "on-tertiary": "#3e2d21",
+                    "error-container": "#93000a",
+                    "on-surface": "#ffffff", // Pure white for text
+                    "on-primary-fixed-variant": "#424753",
+                    "on-secondary": "#233143",
+                    "tertiary": "#ddc1b1",
+                    "secondary-container": "#39485a",
+                    "surface-dim": "#131314",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#27180e",
+                    "primary-fixed-dim": "#c2c6d5",
+                    "surface-bright": "#3a393a",
+                    "on-primary-container": "#727684",
+                    "on-error": "#690005",
+                    "on-background": "#ffffff",
+                    "on-surface-variant": "#94a3b8", // Slate-400 for descriptions
+                    "background": "#01030b", // Background
+                    "surface-container-low": "#1c1b1c",
+                    "error": "#ffb4ab",
+                    "on-tertiary-fixed-variant": "#564336",
+                    "surface": "#131314",
+                    "surface-container-high": "#2a2a2b",
+                    "secondary-fixed-dim": "#b9c8de",
+                    "primary-container": "#01030b",
+                    "surface-tint": "#c2c6d5",
+                    "tertiary-container": "#080200",
+                    "on-secondary-container": "#a7b6cc",
+                    "inverse-surface": "#e5e2e2",
+                    "secondary-fixed": "#d4e4fa",
+                    "surface-container": "#201f20",
+                    "outline": "#909096",
+                    "on-primary-fixed": "#171b27",
+                    "tertiary-fixed": "#faddcc",
+                    "primary-fixed": "#dfe2f2",
+                    "primary": "#c2c6d5",
+                    "on-secondary-fixed": "#0d1c2d",
+                    "surface-variant": "#353435",
+                    "cayenne": "#e85d04" // Accent
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-desktop": "64px",
+                    "unit": "4px",
+                    "asymmetric-offset": "15vw",
+                    "margin-mobile": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg": [
+                            "Archivo Narrow"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "headline-lg-mobile": [
+                            "Archivo Narrow"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "headline-xl": [
+                            "Archivo Narrow"
+                    ],
+                    "metadata": [
+                            "JetBrains Mono"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.0",
+                                    "letterSpacing": "-0.04em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "letterSpacing": "0",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "letterSpacing": "0",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-xl": [
+                            "80px",
+                            {
+                                    "lineHeight": "0.9",
+                                    "letterSpacing": "-0.05em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "metadata": [
+                            "12px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "0.2em",
+                                    "fontWeight": "500"
+                            }
+                    ]
+            },
+            "animation": {
+                "fade-in": "fadeIn 0.3s ease-in-out forwards",
+                "reveal": "reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                "shimmer": "shimmer 2s infinite linear"
+            },
+            "keyframes": {
+                "fadeIn": {
+                    "0%": { opacity: "0" },
+                    "100%": { opacity: "1" }
+                },
+                "reveal": {
+                    "0%": { opacity: "0", transform: "translateY(20px)" },
+                    "100%": { opacity: "1", transform: "translateY(0)" }
+                },
+                "shimmer": {
+                    "0%": { backgroundPosition: "-200% 0" },
+                    "100%": { backgroundPosition: "200% 0" }
+                }
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #01030b;
+        }
+        .blueprint-bg {
+            background-image: radial-gradient(rgba(232, 93, 4, 0.15) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            will-change: transform;
+        }
+        .glass-panel {
+            background-color: rgba(44, 5, 19, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            border-right: 1px solid rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+        /* New Dark Wine Glass Style */
+        .dark-wine-glass {
+            background-color: rgba(44, 5, 19, 0.1);
+            backdrop-filter: blur(24px) saturate(1.5);
+            -webkit-backdrop-filter: blur(24px) saturate(1.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .dark-wine-glass:hover {
+            border-color: rgba(232, 93, 4, 0.3);
+            transform: scale(1.02) translateY(-4px);
+            box-shadow: 0 10px 40px -10px rgba(232, 93, 4, 0.15);
+        }
+
+        .cayenne-glow {
+            background: radial-gradient(circle, rgba(232,93,4,0.15) 0%, rgba(232,93,4,0) 70%);
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
+        }
+        
+        .magnetic-btn {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .magnetic-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-20deg);
+            animation: shimmer 3s infinite;
+        }
+
+        /* Ensure specific opacity handling */
+        .fade-enter {
+            opacity: 0;
+        }
+        .fade-enter-active {
+            opacity: 1;
+            transition: opacity 300ms ease-in;
+        }
+        
+        .stagger-1 { animation-delay: 100ms; }
+        .stagger-2 { animation-delay: 200ms; }
+        .stagger-3 { animation-delay: 300ms; }
+        .stagger-4 { animation-delay: 400ms; }
+        .stagger-5 { animation-delay: 500ms; }
+    </style>
+</head>
+<body class="bg-[#01030b] text-on-surface antialiased overflow-x-hidden min-h-screen selection:bg-cayenne/30 relative font-body-md text-body-md">
+<!-- Fixed Blueprint Layer -->
+<div class="fixed inset-0 pointer-events-none z-[-1] blueprint-bg opacity-80" id="blueprint-bg"></div>
+<!-- Glow Spots -->
+<div class="fixed top-[-20%] left-[-10%] w-[600px] h-[600px] cayenne-glow pointer-events-none z-[-1]" id="glow-1"></div>
+<div class="fixed bottom-[-20%] right-[-10%] w-[600px] h-[600px] cayenne-glow pointer-events-none z-[-1]" id="glow-2"></div>
+<!-- React App Root Container -->
+<div id="root"></div>
+<script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const App = () => {
+            const [currentPage, setCurrentPage] = useState('home');
+            const [scrolled, setScrolled] = useState(false);
+            const [isNavOpen, setIsNavOpen] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    if (window.scrollY > 80) {
+                        setScrolled(true);
+                    } else {
+                        setScrolled(false);
+                    }
+                    
+                    // Parallax for blueprint
+                    const blueprint = document.getElementById('blueprint-bg');
+                    if(blueprint) {
+                        blueprint.style.transform = `translateY(${window.scrollY * 0.1}px)`;
+                    }
+                };
+
+                const handleMouseMove = (e) => {
+                    const glow1 = document.getElementById('glow-1');
+                    const glow2 = document.getElementById('glow-2');
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
+                    
+                    if(glow1 && glow2) {
+                        glow1.style.transform = `translate(${x * 30}px, ${y * 30}px)`;
+                        glow2.style.transform = `translate(${-x * 30}px, ${-y * 30}px)`;
+                    }
+                };
+
+                window.addEventListener('scroll', handleScroll);
+                window.addEventListener('mousemove', handleMouseMove);
+                
+                return () => {
+                    window.removeEventListener('scroll', handleScroll);
+                    window.removeEventListener('mousemove', handleMouseMove);
+                };
+            }, []);
+
+            // Magnetic button effect setup
+            useEffect(() => {
+                const buttons = document.querySelectorAll('.magnetic-btn');
+                
+                buttons.forEach(btn => {
+                    btn.addEventListener('mousemove', (e) => {
+                        const rect = btn.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        
+                        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                    });
+                    
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transform = `translate(0px, 0px)`;
+                    });
+                });
+            });
+
+            const navigateTo = (page) => {
+                setCurrentPage(page);
+                setIsNavOpen(false);
+                window.scrollTo(0, 0);
+            };
+
+            const renderView = () => {
+                switch(currentPage) {
+                    case 'home':
+                        return <HomeView navigateTo={navigateTo} />;
+                    case 'services':
+                        return <ServicesView />;
+                    case 'portfolio':
+                        return <PortfolioView />;
+                    case 'contact':
+                        return <ContactView />;
+                    default:
+                        return <HomeView navigateTo={navigateTo} />;
+                }
+            };
+
+            return (
+                <div className="w-full flex flex-col min-h-screen">
+                    
+                    {/* TopNavBar (COMMAND HUD) */}
+                    <nav className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out flex justify-between items-center px-gutter border border-white/5 bg-surface-container/10 backdrop-blur-md ${scrolled ? 'top-4 w-auto max-w-max rounded-full py-2 shadow-lg bg-surface-container/30' : 'top-6 w-[90%] max-w-7xl rounded-full py-4 bg-surface-container/10'}`}>
+                        <div className="font-headline-lg text-headline-lg-mobile tracking-tighter text-on-surface uppercase pl-4 cursor-pointer" onClick={() => navigateTo('home')}>
+                            KARD.ID
+                        </div>
+                        
+                        {scrolled && (
+                            <div className="hidden md:flex items-center gap-2 px-6 border-l border-white/10 ml-6">
+                                <span className="font-metadata text-[10px] text-cayenne uppercase tracking-widest animate-pulse-slow">⚡ KARD ACTIVE</span>
+                            </div>
+                        )}
+
+                        <div className={`hidden md:flex items-center pr-4 transition-all duration-500 ${scrolled ? 'pl-6 gap-6' : 'gap-8'}`}>
+                            <button 
+                                onClick={() => navigateTo('home')} 
+                                className={`uppercase font-metadata text-metadata tracking-widest hover:text-cayenne transition-colors duration-300 ${currentPage === 'home' ? 'text-cayenne font-bold border-b border-cayenne pb-1' : 'text-on-surface-variant'}`}
+                            >
+                                Beranda
+                            </button>
+                            <button 
+                                onClick={() => navigateTo('services')} 
+                                className={`uppercase font-metadata text-metadata tracking-widest hover:text-cayenne transition-colors duration-300 ${currentPage === 'services' ? 'text-cayenne font-bold border-b border-cayenne pb-1' : 'text-on-surface-variant'}`}
+                            >
+                                Layanan
+                            </button>
+                            <button 
+                                onClick={() => navigateTo('portfolio')} 
+                                className={`uppercase font-metadata text-metadata tracking-widest hover:text-cayenne transition-colors duration-300 ${currentPage === 'portfolio' ? 'text-cayenne font-bold border-b border-cayenne pb-1' : 'text-on-surface-variant'}`}
+                            >
+                                Portofolio
+                            </button>
+                            <button 
+                                onClick={() => navigateTo('contact')} 
+                                className={`uppercase font-metadata text-metadata tracking-widest hover:text-cayenne transition-colors duration-300 ${currentPage === 'contact' ? 'text-cayenne font-bold border-b border-cayenne pb-1' : 'text-on-surface-variant'}`}
+                            >
+                                Kontak
+                            </button>
+                            
+                            {!scrolled && (
+                                <button 
+                                    onClick={() => navigateTo('contact')} 
+                                    className="magnetic-btn bg-cayenne text-primary-container px-6 py-2 uppercase font-metadata text-metadata font-bold ml-4 hover:bg-cayenne/90 shadow-[0_0_15px_rgba(232,93,4,0.2)]"
+                                >
+                                    HUBUNGKAN
+                                </button>
+                            )}
+                        </div>
+                        
+                        <button className="md:hidden text-on-surface p-2 pr-4" onClick={() => setIsNavOpen(!isNavOpen)}>
+                            <span className="material-symbols-outlined">{isNavOpen ? 'close' : 'menu'}</span>
+                        </button>
+                    </nav>
+
+                    {/* Mobile Menu Dropdown */}
+                    {isNavOpen && (
+                        <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center pt-20 md:hidden animate-fade-in">
+                            <div className="flex flex-col gap-8 text-center">
+                                <button onClick={() => navigateTo('home')} className={`text-2xl font-headline-lg uppercase animate-reveal stagger-1 ${currentPage === 'home' ? 'text-cayenne' : 'text-on-surface'}`}>Beranda</button>
+                                <button onClick={() => navigateTo('services')} className={`text-2xl font-headline-lg uppercase animate-reveal stagger-2 ${currentPage === 'services' ? 'text-cayenne' : 'text-on-surface'}`}>Layanan</button>
+                                <button onClick={() => navigateTo('portfolio')} className={`text-2xl font-headline-lg uppercase animate-reveal stagger-3 ${currentPage === 'portfolio' ? 'text-cayenne' : 'text-on-surface'}`}>Portofolio</button>
+                                <button onClick={() => navigateTo('contact')} className={`text-2xl font-headline-lg uppercase animate-reveal stagger-4 ${currentPage === 'contact' ? 'text-cayenne' : 'text-on-surface'}`}>Kontak</button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* MAIN CANVAS */}
+                    <main className="flex-grow w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop pt-40 pb-24 text-left overflow-hidden">
+                        {/* Wrapper for transition */}
+                        <div key={currentPage}>
+                            {renderView()}
+                        </div>
+                    </main>
+
+                    {/* Footer */}
+                    <footer className="max-w-7xl w-full mx-auto px-margin-mobile md:px-margin-desktop py-12 border-t border-white/5 bg-transparent flex flex-col md:flex-row justify-between items-start gap-8 z-10 text-left animate-reveal stagger-5 opacity-0">
+                        <div className="font-headline-lg text-headline-lg-mobile text-on-surface uppercase">KARD.ID</div>
+                        <div className="flex gap-8">
+                            <a className="font-metadata text-metadata text-on-surface-variant uppercase tracking-widest hover:text-cayenne transition-colors" href="#">Privasi</a>
+                            <a className="font-metadata text-metadata text-on-surface-variant uppercase tracking-widest hover:text-cayenne transition-colors" href="#">Syarat</a>
+                            <a className="font-metadata text-metadata text-on-surface-variant uppercase tracking-widest hover:text-cayenne transition-colors" href="#">Keamanan</a>
+                        </div>
+                        <div className="font-metadata text-metadata text-on-surface-variant uppercase tracking-widest">
+                            ©2024 KARD.ID. INTEGRITAS STRUKTURAL TERJAMIN.
+                        </div>
+                    </footer>
+
+                </div>
+            );
+        };
+
+        const HomeView = ({ navigateTo }) => (
+            <div>
+                {/* HOME VIEW - Centered Vertical Stack */}
+                <div className="flex flex-col items-center justify-center text-center min-h-[819px] space-y-12" id="view-home">
+                    {/* Hero Section */}
+                    <div className="flex items-center gap-4 animate-reveal opacity-0">
+                        <div className="w-2 h-2 bg-cayenne"></div>
+                        <span className="font-metadata text-metadata text-cayenne uppercase tracking-widest">// PLATFORM ARCHITECTURE / CORE SECURITY OPERATIONS</span>
+                    </div>
+                    <h1 className="font-headline-xl text-[48px] leading-[1.1] md:text-headline-xl text-white uppercase max-w-5xl mx-auto animate-reveal stagger-1 opacity-0">
+                        ARCHITECTING SECURE DIGITAL ECOSYSTEMS.
+                    </h1>
+                    <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto border-t border-b border-white/5 py-6 px-6 animate-reveal stagger-2 opacity-0">
+                        Merekayasa infrastruktur berperforma tinggi untuk lingkungan perusahaan. Kami membangun platform yang tangguh dan skalabel, dirancang untuk menghadapi tuntutan teknis yang kompleks dengan presisi di setiap titik akhir.
+                    </p>
+                    <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-6 animate-reveal stagger-3 opacity-0">
+                        <button onClick={() => navigateTo('portfolio')} className="magnetic-btn bg-cayenne text-primary-container px-8 py-4 uppercase font-metadata text-metadata font-bold hover:bg-cayenne/90 shadow-[0_0_20px_rgba(232,93,4,0.3)]">
+                            Eksplorasi Hub Portofolio →
+                        </button>
+                    </div>
+
+                    {/* System Diagnostics Metrics (Horizontal under Hero) */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mt-16 animate-reveal stagger-4 opacity-0 text-left">
+                        <div className="dark-wine-glass p-6 rounded-sm border border-white/5 hover:border-cayenne/30 transition-colors">
+                            <div className="font-metadata text-[10px] text-on-surface-variant uppercase tracking-widest mb-2">NETWORK LATENCY</div>
+                            <div className="font-headline-lg text-3xl text-white">12<span className="text-xl text-cayenne">ms</span></div>
+                            <div className="w-full bg-white/5 h-1 mt-3 rounded-full overflow-hidden">
+                                <div className="bg-cayenne h-full w-[15%]"></div>
+                            </div>
+                        </div>
+                        <div className="dark-wine-glass p-6 rounded-sm border border-white/5 hover:border-cayenne/30 transition-colors">
+                            <div className="font-metadata text-[10px] text-on-surface-variant uppercase tracking-widest mb-2">SYSTEM UPTIME</div>
+                            <div className="font-headline-lg text-3xl text-white">99.99<span className="text-xl text-cayenne">%</span></div>
+                            <div className="w-full bg-white/5 h-1 mt-3 rounded-full overflow-hidden">
+                                <div className="bg-cayenne h-full w-[99%]"></div>
+                            </div>
+                        </div>
+                        <div className="dark-wine-glass p-6 rounded-sm border border-white/5 hover:border-cayenne/30 transition-colors">
+                            <div className="font-metadata text-[10px] text-on-surface-variant uppercase tracking-widest mb-2">ACTIVE NODES</div>
+                            <div className="font-headline-lg text-3xl text-white">1,024<span className="text-xl text-cayenne"></span></div>
+                            <div className="flex gap-1 mt-3">
+                                {[...Array(10)].map((_, i) => (
+                                    <div key={i} className={`h-2 w-2 rounded-full ${i < 8 ? 'bg-cayenne' : 'bg-white/10'}`}></div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* 2x2 Modular Matrix Grid Section */}
+                <div className="mt-32 text-center">
+                    <div className="flex items-center justify-center gap-4 mb-12 animate-reveal opacity-0">
+                        <span className="font-metadata text-metadata text-on-surface-variant uppercase tracking-widest border-b border-white/5 pb-2">DIAGNOSTIK SISTEM</span>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto text-left">
+                        {/* Card 1 */}
+                        <div className="dark-wine-glass rounded-xl p-8 flex flex-col justify-between group animate-reveal stagger-1 opacity-0">
+                            <div className="font-metadata text-metadata text-cayenne uppercase">// ENGINEERING BRIEF</div>
+                            <div className="mt-8">
+                                <h3 className="font-headline-lg text-headline-lg-mobile text-white uppercase group-hover:text-cayenne transition-colors">REKAYASA SISTEM</h3>
+                                <p className="font-body-md text-body-md text-on-surface-variant mt-4">Merancang solusi tingkat perusahaan dari arsitektur awal hingga penerapan akhir.</p>
+                            </div>
+                        </div>
+                        {/* Card 2 */}
+                        <div className="dark-wine-glass rounded-xl p-8 flex flex-col justify-between group animate-reveal stagger-2 opacity-0">
+                            <div className="font-metadata text-metadata text-cayenne uppercase">// CORE DOMAINS</div>
+                            <div className="mt-8">
+                                <h3 className="font-headline-lg text-headline-lg-mobile text-white uppercase group-hover:text-cayenne transition-colors">DOMAIN UTAMA</h3>
+                                <ul className="space-y-3 mt-4 text-left">
+                                    <li className="flex items-center gap-3">
+                                        <div className="w-1.5 h-1.5 bg-cayenne"></div>
+                                        <span className="font-metadata text-metadata text-on-surface-variant">Infrastruktur Cloud</span>
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <div className="w-1.5 h-1.5 bg-cayenne"></div>
+                                        <span className="font-metadata text-metadata text-on-surface-variant">Keamanan Zero-Trust</span>
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <div className="w-1.5 h-1.5 bg-cayenne"></div>
+                                        <span className="font-metadata text-metadata text-on-surface-variant">Sistem Terdistribusi</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {/* Card 3 */}
+                        <div className="dark-wine-glass rounded-xl p-8 flex flex-col justify-between group animate-reveal stagger-3 opacity-0">
+                            <div className="font-metadata text-metadata text-cayenne uppercase">// TECH CAPSULES</div>
+                            <div className="mt-8">
+                                <h3 className="font-headline-lg text-headline-lg-mobile text-white uppercase group-hover:text-cayenne transition-colors">STACK</h3>
+                                <div className="flex flex-wrap gap-2 mt-4">
+                                    <span className="bg-white/5 border border-white/10 px-3 py-1 font-metadata text-metadata text-on-surface-variant rounded-sm group-hover:border-cayenne/50 transition-colors">REACT</span>
+                                    <span className="bg-white/5 border border-white/10 px-3 py-1 font-metadata text-metadata text-on-surface-variant rounded-sm group-hover:border-cayenne/50 transition-colors">TAILWIND</span>
+                                    <span className="bg-white/5 border border-white/10 px-3 py-1 font-metadata text-metadata text-on-surface-variant rounded-sm group-hover:border-cayenne/50 transition-colors">LARAVEL</span>
+                                </div>
+                            </div>
+                        </div>
+                        {/* Card 4 */}
+                        <div className="dark-wine-glass rounded-xl p-8 flex flex-col justify-between group animate-reveal stagger-4 opacity-0">
+                            <div className="font-metadata text-metadata text-cayenne uppercase">// TRUST METRICS</div>
+                            <div className="mt-8">
+                                <h3 className="font-headline-lg text-headline-lg-mobile text-white uppercase group-hover:text-cayenne transition-colors">KEPERCAYAAN</h3>
+                                <p className="font-body-md text-body-md text-on-surface-variant mt-4">Menjaga ketersediaan sistem 99,99% dengan protokol failover otomatis yang ketat.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Case Teaser - Full Width Immersive Banner */}
+                <div className="mt-32 mb-16 dark-wine-glass border-y border-cayenne/30 py-16 px-8 text-center animate-reveal opacity-0 max-w-7xl mx-auto">
+                    <div className="max-w-5xl mx-auto">
+                        <div className="font-metadata text-metadata text-cayenne uppercase mb-6">// PENYEBARAN TERBARU</div>
+                        <h2 onClick={() => navigateTo('portfolio')} className="font-headline-lg text-[40px] md:text-[64px] leading-none tracking-tighter text-white uppercase cursor-pointer hover:text-cayenne transition-colors duration-300 inline-block active:scale-[0.97]">
+                            VIRTUAL HOTEL INFRASTRUCTURE PORTAL <span className="material-symbols-outlined align-middle ml-2 opacity-50 group-hover:opacity-100 group-hover:translate-x-2 transition-all">arrow_forward</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const ServicesView = () => (
+            <div className="space-y-24 text-left">
+                <div className="space-y-6 max-w-3xl">
+                    <div className="flex items-center gap-4 animate-reveal opacity-0">
+                        <div className="w-2 h-2 bg-cayenne"></div>
+                        <span className="font-metadata text-metadata text-cayenne uppercase tracking-widest">// DEEP DIVE</span>
+                    </div>
+                    <h1 className="font-headline-xl text-[48px] leading-[1.1] md:text-[80px] text-white uppercase animate-reveal stagger-1 opacity-0">
+                        LAYANAN TEKNOLOGI.
+                    </h1>
+                    <p className="font-body-lg text-on-surface-variant border-l border-white/5 pl-6 animate-reveal stagger-2 opacity-0">
+                        Solusi rekayasa digital komprehensif, dibangun untuk ketahanan dan kinerja skala penuh.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {/* Service Block 1 */}
+                    <div className="dark-wine-glass p-8 rounded-xl flex flex-col space-y-6 animate-reveal stagger-1 opacity-0">
+                        <div className="font-metadata text-cayenne uppercase">// 01</div>
+                        <h2 className="font-headline-lg text-3xl text-white uppercase">Custom Web Application Development</h2>
+                        <p className="text-on-surface-variant">Membangun ekosistem perusahaan yang kompleks dan skalabel menggunakan arsitektur modern berbasis React dan Next.js.</p>
+                        <div className="pt-4 border-t border-white/5 flex gap-2">
+                            <span className="font-metadata text-[10px] text-on-surface-variant bg-white/5 border border-white/10 px-2 py-1 uppercase">React/Next.js</span>
+                            <span className="font-metadata text-[10px] text-on-surface-variant bg-white/5 border border-white/10 px-2 py-1 uppercase">Enterprise Systems</span>
+                        </div>
+                    </div>
+
+                    {/* Service Block 2 */}
+                    <div className="dark-wine-glass p-8 rounded-xl flex flex-col space-y-6 animate-reveal stagger-2 opacity-0">
+                        <div className="font-metadata text-cayenne uppercase">// 02</div>
+                        <h2 className="font-headline-lg text-3xl text-white uppercase">Full System & Infrastructure Maintenance</h2>
+                        <p className="text-on-surface-variant">Memastikan operasional tanpa gangguan dengan pemantauan proaktif dan pemeliharaan infrastruktur cloud secara presisi.</p>
+                        <div className="pt-4 border-t border-white/5 flex gap-2">
+                            <span className="font-metadata text-[10px] text-on-surface-variant bg-white/5 border border-white/10 px-2 py-1 uppercase">24/7 Monitoring</span>
+                            <span className="font-metadata text-[10px] text-on-surface-variant bg-white/5 border border-white/10 px-2 py-1 uppercase">99.99% Uptime</span>
+                        </div>
+                    </div>
+                    
+                    {/* Service Block 3 */}
+                    <div className="dark-wine-glass p-8 rounded-xl flex flex-col space-y-6 animate-reveal stagger-3 opacity-0">
+                        <div className="font-metadata text-cayenne uppercase">// 03</div>
+                        <h2 className="font-headline-lg text-3xl text-white uppercase">Tech & Cybersecurity Consulting</h2>
+                        <p className="text-on-surface-variant">Audit infrastruktur IT mendalam dan strategi postur keamanan yang divalidasi oleh profesional bersertifikat.</p>
+                        <div className="pt-4 border-t border-white/5 flex gap-2">
+                            <span className="font-metadata text-[10px] text-on-surface-variant bg-white/5 border border-white/10 px-2 py-1 uppercase">IT Auditing</span>
+                            <span className="font-metadata text-[10px] text-on-surface-variant bg-white/5 border border-white/10 px-2 py-1 uppercase">BNSP Certified</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const PortfolioView = () => (
+            <div className="space-y-24 text-left">
+                <div className="space-y-6 max-w-3xl">
+                    <div className="flex items-center gap-4 animate-reveal opacity-0">
+                        <div className="w-2 h-2 bg-cayenne"></div>
+                        <span className="font-metadata text-metadata text-cayenne uppercase tracking-widest">// ARCHIVE</span>
+                    </div>
+                    <h1 className="font-headline-xl text-[48px] leading-[1.1] md:text-[80px] text-white uppercase animate-reveal stagger-1 opacity-0">
+                        HUB PORTOFOLIO.
+                    </h1>
+                </div>
+
+                <div className="flex flex-col space-y-8 pb-32">
+                    {/* Case 1 */}
+                    <div className="sticky top-28 dark-wine-glass p-8 md:p-12 rounded-xl border border-white/5 shadow-2xl z-10 animate-reveal stagger-2 opacity-0">
+                        <div className="font-metadata text-cayenne uppercase mb-6">// 01 / VIRTUAL HOTEL MANAGEMENT HUB</div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                            <div>
+                                <h2 className="font-headline-lg text-4xl text-white uppercase mb-6">Portal Infrastruktur Reservasi</h2>
+                                <p className="text-on-surface-variant mb-6">
+                                    Membangun ulang sistem pemesanan warisan menjadi ekosistem Laravel API-first yang sangat terpisah. Mengoptimalkan penjadwalan klien dan alokasi sumber daya.
+                                </p>
+                                <div className="flex gap-2 mb-8">
+                                    <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-sm font-metadata text-xs text-on-surface-variant">LARAVEL</span>
+                                    <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-sm font-metadata text-xs text-on-surface-variant">SCHEDULING</span>
+                                </div>
+                                <div className="flex gap-4">
+                                    <button className="flex items-center gap-2 text-white hover:text-cayenne transition-colors font-metadata text-sm uppercase">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                        Live Project Demo
+                                    </button>
+                                    <button className="flex items-center gap-2 text-white hover:text-cayenne transition-colors font-metadata text-sm uppercase">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                        Source Code Repository
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Case 2 */}
+                    <div className="sticky top-32 dark-wine-glass p-8 md:p-12 rounded-xl border border-white/5 shadow-2xl z-20 mt-12 animate-reveal stagger-3 opacity-0">
+                        <div className="font-metadata text-cayenne uppercase mb-6">// 02 / KARD.ID ENTERPRISE SYSTEM HUB</div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                            <div>
+                                <h2 className="font-headline-lg text-4xl text-white uppercase mb-6">Pusat Manajemen Interaktif</h2>
+                                <p className="text-on-surface-variant mb-6">
+                                    Arsitektur UI interaktif yang berfokus pada pengalaman pengguna premium dengan latensi minimal dan kecepatan muat global yang luar biasa.
+                                </p>
+                                <div className="flex gap-2">
+                                    <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-sm font-metadata text-xs text-on-surface-variant">REACT</span>
+                                    <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-sm font-metadata text-xs text-on-surface-variant">EDGE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const ContactView = () => (
+            <div className="space-y-16 text-center flex flex-col items-center">
+                <div className="space-y-6 max-w-3xl">
+                    <div className="flex items-center justify-center gap-4 animate-reveal opacity-0">
+                        <div className="w-2 h-2 bg-cayenne"></div>
+                        <span className="font-metadata text-metadata text-cayenne uppercase tracking-widest">// SECURE CONNECTION</span>
+                    </div>
+                    <h1 className="font-headline-xl text-[48px] leading-[1.1] md:text-[80px] text-white uppercase animate-reveal stagger-1 opacity-0">
+                        INITIATE INTAKE.
+                    </h1>
+                </div>
+
+                <div className="dark-wine-glass p-8 md:p-12 rounded-xl w-full max-w-xl border border-white/5 animate-reveal stagger-2 opacity-0 text-left">
+                    <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                        <div className="space-y-2">
+                            <label className="font-metadata text-xs text-cayenne uppercase tracking-widest block">IDENTIFICATION // NAME</label>
+                            <input type="text" className="w-full bg-surface-container/30 border border-white/10 p-4 text-white focus:outline-none focus:border-cayenne transition-colors font-body-md rounded-sm" placeholder="Enter full name" />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="font-metadata text-xs text-cayenne uppercase tracking-widest block">COMMUNICATION // EMAIL</label>
+                            <input type="email" className="w-full bg-surface-container/30 border border-white/10 p-4 text-white focus:outline-none focus:border-cayenne transition-colors font-body-md rounded-sm" placeholder="Enter corporate email" />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="font-metadata text-xs text-cayenne uppercase tracking-widest block">REQUIREMENTS // PROJECT SCOPE</label>
+                            <textarea rows="4" className="w-full bg-surface-container/30 border border-white/10 p-4 text-white focus:outline-none focus:border-cayenne transition-colors font-body-md rounded-sm resize-none" placeholder="Detail system requirements..."></textarea>
+                        </div>
+                        <button className="magnetic-btn w-full bg-cayenne text-primary-container px-8 py-4 uppercase font-metadata text-metadata font-bold hover:bg-cayenne/90 shadow-[0_0_20px_rgba(232,93,4,0.3)] mt-4">
+                            Transmit Data
+                        </button>
+                    </form>
+                </div>
+
+                {/* Delivery Timeline */}
+                <div className="w-full max-w-4xl pt-16 border-t border-white/5 animate-reveal stagger-3 opacity-0 text-left">
+                    <div className="font-metadata text-metadata text-on-surface-variant uppercase tracking-widest mb-8">DELIVERY PROTOCOL</div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 relative">
+                        <div>
+                            <div className="font-metadata text-cayenne mb-2">01 / SYSTEM DISCOVERY</div>
+                            <div className="text-on-surface-variant text-sm mt-2">Architecture audit and requirement mapping.</div>
+                        </div>
+                        <div className="hidden md:flex absolute top-2 left-[22%] text-cayenne material-symbols-outlined">arrow_forward</div>
+                        <div>
+                            <div className="font-metadata text-cayenne mb-2">02 / BLUEPRINT DESIGN</div>
+                            <div className="text-on-surface-variant text-sm mt-2">Technical schematic generation.</div>
+                        </div>
+                        <div className="hidden md:flex absolute top-2 left-[47%] text-cayenne material-symbols-outlined">arrow_forward</div>
+                        <div>
+                            <div className="font-metadata text-cayenne mb-2">03 / AGILE SPRINT ENGINE</div>
+                            <div className="text-on-surface-variant text-sm mt-2">Iterative development and integration.</div>
+                        </div>
+                        <div className="hidden md:flex absolute top-2 left-[72%] text-cayenne material-symbols-outlined">arrow_forward</div>
+                        <div>
+                            <div className="font-metadata text-cayenne mb-2">04 / PRODUCTION LAUNCH</div>
+                            <div className="text-on-surface-variant text-sm mt-2">Deployment, scaling, and handover.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body></html>
